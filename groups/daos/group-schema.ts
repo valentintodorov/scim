@@ -11,12 +11,11 @@ export interface IGroup extends Document {
     displayName: String,
     members: [String],
     // members: [
-    //     {
-    //         value: String,
-    //         $ref: String,  //"referenceTypes": ["User","Group"],
-    //         type: String, //"User","Group"
-    //     }
-    // ],
+    //      {
+    //          value: String,
+    //          type: String, //"User","Group"
+    //      }
+    //  ],
     meta: {
         resourceType: string, //Schema
         created: Date,
@@ -37,13 +36,11 @@ export const GroupSchema: Schema = new Schema({
     externalId: String,
     displayName: String,
     members: [String],
-    //members: [
-    //   { type: Schema.Types.ObjectId }
-    //     // {
-    //     //     value: String,
-    //     //     $ref: String,  //"referenceTypes": ["User","Group"],
-    //     //     type: { type: String }, //"User","Group"
-    //     // }
+    // members: [
+    //     {
+    //         value: String,
+    //         type: { type: String }, //"User","Group"
+    //     }
     // ],
     meta: {
       resourceType: String,//"Group"

@@ -22,7 +22,7 @@ class GroupsDao {
     async addGroup(dbConnection: Connection, groupFields: CreateGroupDto) {
         let currentDate = new Date();   
         groupFields.meta = groupFields.meta ?? {};
-        groupFields.resourceType = 'Group';
+        groupFields.meta.resourceType = 'Group';
         groupFields.meta.created = currentDate;
         groupFields.meta.lastModified = currentDate;
 
@@ -102,6 +102,9 @@ class GroupsDao {
             let currentDate = new Date();
             groupFields.meta = groupFields.meta ?? {};
             groupFields.meta.lastModified = currentDate;
+            if(groupFields.members) {
+                (groupFields as any).members = groupFields.members.map(g => g.value);
+            }
 
             const Groups = dbConnection.model('Groups', GroupSchema);
             const existingUser = await Groups.findOneAndUpdate(

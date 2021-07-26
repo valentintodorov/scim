@@ -21,11 +21,10 @@ class UsersDao {
     async addUser(dbConnection: Connection, userFields: CreateUserDto) {
         let currentDate = new Date();   
         userFields.meta = userFields.meta ?? {};
-        userFields.resourceType = 'User';
+        userFields.meta.resourceType = 'User';
         userFields.meta.created = currentDate;
         userFields.meta.lastModified = currentDate;
-        userFields.groups = userFields.groups.map(g=>(g as any).value.toString());
-
+        //userFields.groups = userFields.groups.map(g=>(g as any).value.toString());
 
         let Users = dbConnection.model('Users', UserSchema);
         let user = new Users(userFields);
@@ -71,15 +70,6 @@ class UsersDao {
             let user = Users.findOne({ _id: userId }).select(queryProjection).exec();
 
             return user;
-            // let userGroups:[string] = (user as any).groups;
-            // let Groups = dbConnection.model('Groups', GroupSchema);
-            // var groups = await Groups.find({_id: {$in: userGroups}})
-            // .select(' id externalId displayName schemas ')
-            // .exec();
-
-            // let userJson = user?.toJSON() as any;
-            // userJson.groups = groups?.toJSON();
-            // return userJson;
         }
         return null;
     }
@@ -137,7 +127,7 @@ class UsersDao {
     async getUserGroups(dbConnection: Connection, userGroups: [string]) {
         let Groups = dbConnection.model('Groups', GroupSchema);
         var groups = Groups.find({_id: {$in: userGroups}})
-        .select(' id externalId displayName schemas ')
+        .select(' id externalId displayName ')
         .exec();
 
         return groups;
