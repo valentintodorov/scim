@@ -57,8 +57,16 @@ export interface PutUserDto {
     timezone: String;
     active: Boolean;
     password: String;
-    created: Date;
-    lastModified: Date;
-    version: Number;
+    meta: {
+      created: Date;
+      lastModified: Date;
+      version: Number;
+    };
+    groups: [
+      {
+        value: String,
+        display: String,
+      }
+    ];
     [key: string]: any
 }

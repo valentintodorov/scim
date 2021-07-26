@@ -56,9 +56,16 @@ export interface CreateUserDto {
     timezone: String;
     active: Boolean;
     password: String;
-    created: Date;
-    lastModified: Date;
-    version: Number;
-    groups: string[];
+    meta: {
+      created: Date;
+      lastModified: Date;
+      version: Number;
+    };
+    groups: [
+      {
+        value: String,
+        display: String,
+      }
+    ];
     [key: string]: any;
 }

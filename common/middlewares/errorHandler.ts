@@ -12,9 +12,15 @@ class ErrorsHandlerMiddleware {
         next: express.NextFunction
     ) => {
         if(this.isTrustedError(err)) {
+            log(err.name);
+            log(err.message);
+            log(err.stack);
             let e = err as ScimError;
             res.status(e.httpCode).send(ScimErrorSchema.jsonErr(e.httpCode , e.message));
         } else {
+            log(err.name);
+            log(err.message);
+            log(err.stack);
             res.status(500).send(ScimErrorSchema.jsonErr(500 , 'Internal Server Error'));
         }
     }

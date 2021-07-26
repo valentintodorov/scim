@@ -9,7 +9,13 @@ export interface PutGroupDto {
   members: [
     {
         value: String,
+        display: String,
     }
   ];
+  meta: {
+    created: Date;
+    lastModified: Date;
+    version: Number;
+  };
   [key: string]: any
 }

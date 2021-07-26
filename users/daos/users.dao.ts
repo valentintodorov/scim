@@ -21,10 +21,13 @@ class UsersDao {
     async addUser(dbConnection: Connection, userFields: CreateUserDto) {
         let currentDate = new Date();   
         userFields.meta = userFields.meta ?? {};
-        userFields.meta.resourceType = 'User';
+        //userFields.meta.resourceType = 'User';
         userFields.meta.created = currentDate;
         userFields.meta.lastModified = currentDate;
-        //userFields.groups = userFields.groups.map(g=>(g as any).value.toString());
+
+        if(userFields.groups) {
+            (userFields as any).members = userFields.groups.map(g => g.value);
+        }
 
         let Users = dbConnection.model('Users', UserSchema);
         let user = new Users(userFields);
@@ -109,8 +112,14 @@ class UsersDao {
     ) {
         if (Types.ObjectId.isValid(userId)) {
             let currentDate = new Date();
-            userFields.meta = userFields.meta ?? {};
-            userFields.meta.lastModified = currentDate;
+            //userFields.meta = userFields.meta ?? {};
+            if(!!userFields.meta) {
+                userFields.meta.lastModified = currentDate;
+            }
+
+            if(userFields.groups) {
+                (userFields as any).members = userFields.groups.map(g => g.value);
+            }
 
             const Users = dbConnection.model('Users', UserSchema);
             const existingUser = await Users.findOneAndUpdate(

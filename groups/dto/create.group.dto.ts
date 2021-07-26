@@ -7,8 +7,14 @@ export interface CreateGroupDto {
   displayName: String;
   members: [
     {
-        value: String,
+      value: String,
+      display: String,
     }
   ];
+  meta: {
+    created: Date;
+    lastModified: Date;
+    version: Number;
+  };
   [key: string]: any;
 }
