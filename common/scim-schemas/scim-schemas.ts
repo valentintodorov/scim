@@ -905,53 +905,53 @@
               "returned": "default",
               "uniqueness": "none"
             },
-            {
-              "name": "manager",
-              "type": "complex",
-              "multiValued": false,
-              "description": "The User's manager. A complex type that optionally allows Service Providers to represent organizational hierarchy by referencing the 'id' attribute of another User.",
-              "required": false,
-              "subAttributes": [
-                {
-                  "name": "value",
-                  "type": "string",
-                  "multiValued": false,
-                  "description": "The id of the SCIM resource representing the User's  manager.  REQUIRED.",
-                  "required": false,
-                  "caseExact": false,
-                  "mutability": "readWrite",
-                  "returned": "default",
-                  "uniqueness": "none"
-                },
-                {
-                  "name": "$ref",
-                  "type": "reference",
-                  "referenceTypes": [
-                    "User"
-                  ],
-                  "multiValued": false,
-                  "description": "The URI of the SCIM resource representing the User's manager.  REQUIRED.",
-                  "required": false,
-                  "caseExact": false,
-                  "mutability": "readWrite",
-                  "returned": "default",
-                  "uniqueness": "none"
-                },
-                {
-                  "name": "displayName",
-                  "type": "string",
-                  "multiValued": false,
-                  "description": "The displayName of the User's manager. OPTIONAL and READ-ONLY.",
-                  "required": false,
-                  "caseExact": false,
-                  "mutability": "readOnly",
-                  "returned": "default",
-                  "uniqueness": "none"
-                }
-              ],
-              "mutability": "readWrite",
-              "returned": "default"
-            }
+            // {
+            //   "name": "manager",
+            //   "type": "complex",
+            //   "multiValued": false,
+            //   "description": "The User's manager. A complex type that optionally allows Service Providers to represent organizational hierarchy by referencing the 'id' attribute of another User.",
+            //   "required": false,
+            //   "subAttributes": [
+            //     {
+            //       "name": "value",
+            //       "type": "string",
+            //       "multiValued": false,
+            //       "description": "The id of the SCIM resource representing the User's  manager.  REQUIRED.",
+            //       "required": false,
+            //       "caseExact": false,
+            //       "mutability": "readWrite",
+            //       "returned": "default",
+            //       "uniqueness": "none"
+            //     },
+            //     {
+            //       "name": "$ref",
+            //       "type": "reference",
+            //       "referenceTypes": [
+            //         "User"
+            //       ],
+            //       "multiValued": false,
+            //       "description": "The URI of the SCIM resource representing the User's manager.  REQUIRED.",
+            //       "required": false,
+            //       "caseExact": false,
+            //       "mutability": "readWrite",
+            //       "returned": "default",
+            //       "uniqueness": "none"
+            //     },
+            //     {
+            //       "name": "displayName",
+            //       "type": "string",
+            //       "multiValued": false,
+            //       "description": "The displayName of the User's manager. OPTIONAL and READ-ONLY.",
+            //       "required": false,
+            //       "caseExact": false,
+            //       "mutability": "readOnly",
+            //       "returned": "default",
+            //       "uniqueness": "none"
+            //     }
+            //   ],
+            //   "mutability": "readWrite",
+            //   "returned": "default"
+            // }
           ],
           "meta": {
             "resourceType": "Schema",

@@ -42,6 +42,10 @@ class UsersService implements CRUD {
         return GroupsDao.getGroupByExternalId(dbConnection, externalId);
     }
 
+    async getGroupMembers(dbConnection: Connection, groupUsers: [string]) {
+        return GroupsDao.getGroupMembers(dbConnection, groupUsers);
+    }
+
 }
 
 export default new UsersService();

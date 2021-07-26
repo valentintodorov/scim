@@ -7,6 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import debug from 'debug';
 import { Connection } from 'mongoose';
 import { IGroup, Group, GroupSchema } from './group-schema';
+import { IUser, UserModel, UserSchema } from '../../users/daos/user-schema';
 
 import { model, Schema, Model, Document, Types, ObjectId } from 'mongoose';
 import mongoose from 'mongoose';
@@ -114,8 +115,13 @@ class GroupsDao {
         return null;
     }
 
-    async getGroupMembers () {
-        return null;
+    async getGroupMembers (dbConnection: Connection, groupUsers: [string]) {
+        let Users = dbConnection.model('Users', UserSchema);
+        var users = Users.find({_id: {$in: groupUsers}})
+        .select(' id displayName ')
+        .exec();
+
+        return users;
     }
 }
 

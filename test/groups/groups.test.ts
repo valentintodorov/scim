@@ -16,14 +16,14 @@ describe('groups endpoints', function () {
     before(function () {
         request = supertest.agent(app);
     });
-    // GET /v2/Groups?filter=displayName sw 'Group'
-    // GET /v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a
+
+    // // GET /v2/Groups?filter=displayName sw 'Group'
+    // // GET /v2/Groups/e9e30dba-f08f-4109-8486-d5c6a331660a
     // it('should allow a POST to /groups', async function () {
     //     const res = await request
     //     .post('/groups')
     //     .set({ Authorization: auth })
     //     .send(groupBodies.firstGroupBody);
-
     //     expect(res.status).to.equal(201);
     //     expect(res.body).not.to.be.empty;
     //     expect(res.body).to.be.an('object');
@@ -39,7 +39,6 @@ describe('groups endpoints', function () {
     //     .post('/groups')
     //     .set({ Authorization: auth })
     //     .send(groupBodies.secondGroupBody);
-
     //     expect(res.status).to.equal(201);
     //     expect(res.body).not.to.be.empty;
     //     expect(res.body).to.be.an('object');
@@ -55,7 +54,6 @@ describe('groups endpoints', function () {
     //     .post('/groups')
     //     .set({ Authorization: auth })
     //     .send(groupBodies.thirdGroupBody);
-
     //     expect(res.status).to.equal(201);
     //     expect(res.body).not.to.be.empty;
     //     expect(res.body).to.be.an('object');
@@ -80,4 +78,26 @@ describe('groups endpoints', function () {
     //     expect(res.body.externalId).to.be.a('string');
     //     expect(res.body.displayName).to.equal(groupBodies.firstGroupBody.displayName);
     // });
+
+    it('should allow a PUT to /groups/:userId to change first and last names', async function () {
+        let firsthGroupIdTest = '60fef0c563ccbe3500680b62';
+        const res = await request
+        .put(`/groups/${firsthGroupIdTest}`)
+        .set({ Authorization: auth })
+        .send({
+            schemas: groupBodies.firstGroupBody.schemas,
+            members: ['60fe82fc70f1953b241309b3', '60fe8accc80df221c0e57077'],
+            externalId: groupBodies.firstGroupBody.externalId + '_1',
+            displayName: groupBodies.firstGroupBody.displayName + '_1',
+                // name: { 
+                //     givenName : newGivenName 
+                // }
+            });
+        expect(res.status).to.equal(200);
+        expect(res.body).not.to.be.empty;
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.be.a('string');
+        expect(res.body.id).to.equal(firsthGroupIdTest);
+        expect(res.body.schemas).to.be.an('array');
+    });
 });

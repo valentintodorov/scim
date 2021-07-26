@@ -76,7 +76,7 @@ class UsersController {
                                         if(item.displayName) {
                                             el.display = item.displayName;
                                         }
-                                        el.location = `${location}/Groups/${item.id}`;
+                                        el.$ref = `${location}/Groups/${item.id}`;
                                         el.type = 'direct';
                                         return el;
                                     });
@@ -124,7 +124,7 @@ class UsersController {
                                             if(item.displayName) {
                                                 el.display = item.displayName;
                                             }
-                                            el.location = `${location}/Groups/${item.id}`;
+                                            el.$ref = `${location}/Groups/${item.id}`;
                                             el.type = 'direct';
                                             return el;
                                         });
@@ -191,7 +191,7 @@ class UsersController {
                                 if(item.displayName) {
                                     el.display = item.displayName;
                                 }
-                                el.location = `${location}/Groups/${item.id}`;
+                                el.$ref = `${location}/Groups/${item.id}`;
                                 el.type = 'direct';
                                 return el;
                             });
@@ -236,7 +236,7 @@ class UsersController {
                                 if(item.displayName) {
                                     el.display = item.displayName;
                                 }
-                                el.location = `${location}/Groups/${item.id}`;
+                                el.$ref = `${location}/Groups/${item.id}`;
                                 el.type = 'direct';
                                 return el;
                             });
@@ -258,7 +258,8 @@ class UsersController {
         try 
         {
             const dbConnection = connectionManager.getTenantDbConnection((req as any).tenantId);
-
+            log(req.url);
+            log(req.body);
             log(await usersService.patchById(dbConnection, req.body.id, req.body));
             res.status(204).send();
         } catch(err) {
@@ -270,7 +271,8 @@ class UsersController {
         try 
         {
             const dbConnection = connectionManager.getTenantDbConnection((req as any).tenantId);
-
+            log(req.url);
+            log(req.body);
             log(await usersService.putById(dbConnection, req.body.id, req.body));
             let user = await usersService.readById(dbConnection, req.body.id, '');
             res.status(200).send(user?.toJSON());
@@ -283,7 +285,8 @@ class UsersController {
         try 
         {
             const dbConnection = connectionManager.getTenantDbConnection((req as any).tenantId);
-
+            log(req.url);
+            log(req.body);
             log(await usersService.deleteById(dbConnection, req.body.id));
             res.status(204).send();
         } catch(err) {
