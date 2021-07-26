@@ -1,0 +1,334 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+       "title":"SCIM API",
+       "version":"1.0.0"
+    },
+    "basePath":"/",
+    "tags":[
+       {
+          "name":"users",
+          "description":"Operations about user"
+       },
+       {
+            "name":"groups",
+            "description":"Operations about groups"
+        },
+        {
+            "name":"discovery",
+            "description":"Operations about discovery"
+         }
+    ],
+    "paths":{
+       "/Users":{
+          "get":{
+             "tags":[
+                "users"
+             ],
+             "summary":"Retrieves one or more complete or partial resources.",
+             "description":"Retrieve a list of Users",
+             "responses":{
+                "200":{
+                   "description":"Return a list of Users."
+                }
+             },
+             "security": [
+                {
+                    "basicAuth": []
+                }
+            ]
+          },
+          "post":{
+             "tags":[
+                "users"
+             ],
+             "summary":"Depending on the endpoint, creates new resources, creates a search request, or MAY be used to bulk-modify resources.",
+             "description":"",
+             "consumes":[
+                "application/json",
+                "application/scim+json"
+             ],
+             "produces":[
+                "application/json",
+                "application/scim+json"
+             ],
+             "parameters":[
+                {
+                   "in":"body",
+                   "name":"body",
+                   "description":"User object that needs to be added",
+                   "required":true,
+                   "schema":{
+                      "type":"object",
+                      "properties":{
+                         "schemas":{
+                            "type":"array"
+                         },
+                         "externalId":{
+                            "type":"string"
+                         },
+                         "username":{
+                            "type":"string"
+                         },
+                         "name":{
+                            "type":"object",
+                            "properties":{
+                               "givenName":{
+                                  "type":"string"
+                               },
+                               "familyName":{
+                                  "type":"string"
+                               }
+                            }
+                         }
+                      },
+                      "example":{
+                         "schemas":[
+                            "urn:ietf:params:scim:schemas:core:2.0:User"
+                         ],
+                         "userName":"bjensen",
+                         "externalId":"bjensen",
+                         "name":{
+                            "formatted":"Ms. Barbara J Jensen III",
+                            "familyName":"Jensen",
+                            "givenName":"Barbara"
+                         }
+                      }
+                   }
+                }
+             ],
+             "responses":{
+                "201":{
+                   "description":"Returns a successful HTTP status code 201."
+                },
+                "409":{
+                   "description":"(Conflict) a \"User\" resource with a duplicate \"userName\""
+                }
+             }
+          }
+       },
+       "/Users/{id}":{
+          "get":{
+             "tags":[
+                "users"
+             ],
+             "summary":"Retrieves one or more complete or partial resources.",
+             "description":"Retrieves a single User via the \"/Users\" endpoint",
+             "parameters":[
+                {
+                   "in":"path",
+                   "name":"id",
+                   "schema":{
+                      "type":"integer"
+                   },
+                   "required":true
+                }
+             ],
+             "responses":{
+                "200":{
+                   "description":"Retrieves a single User ."
+                }
+             }
+          },
+          "put":{
+             "tags":[
+                "users"
+             ],
+             "summary":"Retrieves one or more complete or partial resources.",
+             "description":"Update an existing User",
+             "consumes":[
+                "application/json",
+                "application/scim+json"
+             ],
+             "produces":[
+                "application/json",
+                "application/scim+json"
+             ],
+             "parameters":[
+                {
+                   "in":"path",
+                   "name":"id",
+                   "schema":{
+                      "type":"integer"
+                   },
+                   "required":true
+                },
+                {
+                   "in":"body",
+                   "name":"body",
+                   "description":"User object that needs to be added",
+                   "required":true,
+                   "schema":{
+                      "type":"object",
+                      "properties":{
+                         "schemas":{
+                            "type":"array"
+                         },
+                         "externalId":{
+                            "type":"string"
+                         },
+                         "username":{
+                            "type":"string"
+                         },
+                         "name":{
+                            "type":"object",
+                            "properties":{
+                               "givenName":{
+                                  "type":"string"
+                               },
+                               "familyName":{
+                                  "type":"string"
+                               }
+                            }
+                         }
+                      },
+                      "example":{
+                         "schemas":[
+                            "urn:ietf:params:scim:schemas:core:2.0:User"
+                         ],
+                         "userName":"bjensen",
+                         "externalId":"bjensen",
+                         "name":{
+                            "formatted":"Ms. Barbara J Jensen III",
+                            "familyName":"Jensen",
+                            "givenName":"Barbara"
+                         }
+                      }
+                   }
+                }
+             ],
+             "responses":{
+                "200":{
+                   "description":"Returns a successful HTTP status code 200.",
+                   "content":{
+                      "application/scim+json":{
+                         "schema":{
+                            "type":"object",
+                            "properties":{
+                               "username":{
+                                  "type":"string"
+                               },
+                               "givenName":{
+                                  "type":"string"
+                               },
+                               "familyName":{
+                                  "type":"string"
+                               }
+                            },
+                            "example":{
+                               "username":"jr_username",
+                               "givenName":"Jessica",
+                               "familyName":"Right"
+                            }
+                         }
+                      }
+                   }
+                }
+             }
+          },
+          "patch":{
+             "tags":[
+                "users"
+             ],
+             "summary":"Modifies a resource by replacing existing attributes with a specified set of replacement attributes (replace).  PUT MUST NOT be used to create new resources.",
+             "description":"Delete a single User",
+             "parameters":[
+                {
+                   "in":"path",
+                   "name":"id",
+                   "schema":{
+                      "type":"integer"
+                   },
+                   "required":true
+                }
+             ],
+             "responses":{
+                "204":{
+                   "description":"Returns a successful HTTP status code 204 (No Content)."
+                }
+             }
+          },
+          "delete":{
+             "tags":[
+                "users"
+             ],
+             "summary":"Deletes a resource.",
+             "description":"Delete a single User",
+             "parameters":[
+                {
+                   "in":"path",
+                   "name":"id",
+                   "schema":{
+                      "type":"integer"
+                   },
+                   "required":true
+                }
+             ],
+             "responses":{
+                "204":{
+                   "description":"Returns a successful HTTP status code 204 (No Content)."
+                }
+             }
+          }
+       },
+       "/ServiceProviderConfig":{
+          "get":{
+             "tags":[
+                "discovery"
+             ],
+             "summary":"Get service provider config",
+             "description":"An HTTP GET to this endpoint will return a JSON structure that describes the SCIM specification features available on a service provider. ",
+             "responses":{
+                "200":{
+                   "description":"successful operation"
+                }
+             }
+          }
+       },
+       "/ResourceTypes":{
+          "get":{
+             "tags":[
+                "discovery"
+             ],
+             "summary":"Get resources",
+             "description":"An HTTP GET to this endpoint is used to retrieve information about resource schemas supported by a SCIM service provider. ",
+             "responses":{
+                "200":{
+                   "description":"successful operation"
+                }
+             }
+          }
+       },
+       "/Schemas":{
+          "get":{
+             "tags":[
+                "discovery"
+             ],
+             "summary":"Get schemas",
+             "description":"An HTTP GET to this endpoint is used to discover the types of resources available on a SCIM service provider (e.g., Users and Groups).",
+             "responses":{
+                "200":{
+                   "description":"successful operation"
+                }
+             }
+          }
+       }
+    },
+    "definitions":{
+
+    },
+    "responses":{
+       
+    },
+    "parameters":{
+       
+    },
+    "components": {
+        "securitySchemes": {
+            "BasicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        }
+    }
+ }

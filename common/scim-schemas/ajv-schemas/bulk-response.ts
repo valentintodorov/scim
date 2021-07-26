@@ -1,0 +1,1 @@
+// urn:ietf:params:scim:api:messages:2.0:BulkResponse	Bulk Operations Response	[RFC7644, Section 3.7]

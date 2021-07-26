@@ -1,0 +1,1 @@
+// urn:ietf:params:scim:schemas:core:2.0:Group	Group Resource	[RFC7643, Section 4.2]

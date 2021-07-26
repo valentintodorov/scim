@@ -1,0 +1,1 @@
+// urn:ietf:params:scim:api:messages:2.0:Error	Error Response	[RFC7644, Section 3.12]
