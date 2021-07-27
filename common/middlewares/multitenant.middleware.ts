@@ -1,7 +1,7 @@
 import express from 'express';
 import debug from 'debug';
 
-const log: debug.IDebugger = debug('app:users-controller');
+const log: debug.IDebugger = debug('app:multitenant-middleware');
 
 class MultitenantMiddleware {
     constructor() {}
@@ -11,14 +11,19 @@ class MultitenantMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) => {
-        let tenantId = 'default';
-        req.subdomains[0]
-        let subdomain = this.getSubdomain(req);
-        if(subdomain){
-            tenantId = subdomain;
+        try {
+            let tenantId = 'default';
+            req.subdomains[0]
+            let subdomain = this.getSubdomain(req);
+            if(subdomain){
+                tenantId = subdomain;
+            }
+            (req as any).tenantId = tenantId;
+            next();
+        } catch (err) {
+            log(err);
+            next(err); 
         }
-        (req as any).tenantId = tenantId;
-        next(); 
     }
 
     getSubdomain(req: express.Request) {

@@ -65,7 +65,7 @@ class UsersController {
                             let userJson: any = user.toJSON();
                             userJson.meta = userJson.meta ?? {};
                             userJson.meta.location = `${location}/Users/${user.id}`;
-                            //userJson.meta.resourceType = 'User';
+                            userJson.meta.resourceType = 'User';
                             // move out
                             if (!req.query.attributes || arrAttr.includes('groups')) { // include groups
                                 let groups = await usersService.getUserGroups(dbConnection, (user as any).groups);
@@ -112,7 +112,7 @@ class UsersController {
                             let userJson: any = user.toJSON();
                             userJson.meta = userJson.meta ?? {};
                             userJson.meta.location = `${location}/Users/${user.id}`;
-                            //userJson.meta.resourceType = 'User';
+                            userJson.meta.resourceType = 'User';
                             // move out
                             if (!req.query.attributes || arrAttr.includes('groups')) { // include groups
                                 if(user.groups && Array.isArray(user.groups) && user.groups.length > 0) {
@@ -179,7 +179,7 @@ class UsersController {
                 let userJson: any = user.toJSON();
                 userJson.meta = userJson.meta ?? {};
                 userJson.meta.location = `${location}/Users/${user.id}`;
-                //userJson.meta.resourceType = 'User';
+                userJson.meta.resourceType = 'User';
                 // move out
                 if (!req.query.attributes || arrAttr.includes('groups')) { // include groups
                     if(user.groups && Array.isArray(user.groups) && user.groups.length > 0) {
@@ -224,7 +224,7 @@ class UsersController {
                 let userJson: any = user.toJSON();
                 userJson.meta = userJson.meta ?? {};
                 userJson.meta.location = `${location}/Users/${user.id}`;
-                //userJson.meta.resourceType = 'User';
+                userJson.meta.resourceType = 'User';
                 // move out
                 if (!req.query.attributes || arrAttr.includes('groups')) { // include groups
                     if(user.groups && Array.isArray(user.groups) && user.groups.length > 0) {

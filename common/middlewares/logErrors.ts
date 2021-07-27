@@ -2,7 +2,6 @@ import debug from 'debug';
 
 import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
-//import { MongoDB } from 'winston-mongodb';
 
 const log: debug.IDebugger = debug('app:log-error');
 

@@ -5,7 +5,6 @@ import mongoSanitize from 'express-mongo-sanitize';
 import compression from 'compression';
 import * as http from 'http';
 import debug from 'debug';
-import cors from 'cors';
 
 import {CommonRoutesConfig} from './common/common.routes.config';
 import {UsersRoutes} from './users/users.routes.config';
@@ -14,15 +13,13 @@ import {DiscoveryRoutes} from './discovery/discovery.routes.config';
 
 import MultitenantMiddleware from './common/middlewares/multitenant.middleware';
 import logErrors from './common/middlewares/logErrors';
-//import requestLog from './common/middlewares/requestLog';
+import RequestLogMiddleware from './common/middlewares/request.log.middleware';
 import ErrorsHandlerMiddleware from './common/middlewares/errorHandler';
 
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerDocument from './swagger/scim-swagger.json';
 
 import dotenv from 'dotenv';
-import morgan from 'morgan';
-
 
 const dotenvResult = dotenv.config();
 if (dotenvResult.error) {
@@ -32,9 +29,9 @@ const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = process.env.PORT;
 const routes: Array<CommonRoutesConfig> = [];
-const debugLog: debug.IDebugger = debug('app');
+const log: debug.IDebugger = debug('app');
 
-app.use(morgan('combined'));
+app.use(RequestLogMiddleware.logToDbHandler);
 
 // compress all responses
 app.use(compression())
@@ -50,7 +47,7 @@ app.use(express.json(
 //app.use(bodyParser.json());
 
 // To remove data, use:
-//app.use(mongoSanitize());
+app.use(mongoSanitize());
 
 app.use(MultitenantMiddleware.extractMultitenantId);
 
@@ -79,7 +76,6 @@ app.get('/ping', (req: express.Request, res: express.Response) => {
 
 // initialize the logger with the above configuration
 app.use(logErrors);
-//app.use(requestLog);
 app.use(ErrorsHandlerMiddleware.errorHandler);
 
 process.on('uncaughtException', err => {
@@ -89,7 +85,7 @@ process.on('uncaughtException', err => {
 
 export default server.listen(port, () => {
     routes.forEach((route: CommonRoutesConfig) => {
-        debugLog(`Routes configured for ${route.getName()}`);
+        log(`Routes configured for ${route.getName()}`);
     });
     // our only exception to avoiding console.log(), because we
     // always want to know when the server is done starting up

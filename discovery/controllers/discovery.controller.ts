@@ -5,7 +5,7 @@ import ResourceType from '../../common/scim-schemas/scim-resource-type';
 import Schemas from '../../common/scim-schemas/scim-schemas';
 import ServiceProviderConfigs from '../../common/scim-schemas/scim-service-provider-configs';
 
-const log: debug.IDebugger = debug('app:users-controller');
+const log: debug.IDebugger = debug('app:discovery-controller');
 class DiscoveryController {
     async getServiceProviderConfig(req: express.Request, res: express.Response, next: express.NextFunction) {
         try 

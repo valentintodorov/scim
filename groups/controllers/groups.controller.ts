@@ -6,7 +6,7 @@ import ScimCollection from '../../common/scim-schemas/scim-collection';
 
 import connectionManager from '../../common/services/connection-manager';
 
-const log: debug.IDebugger = debug('app:users-controller');
+const log: debug.IDebugger = debug('app:groups-controller');
 class GroupsController {
     async listGroups(req: express.Request, res: express.Response, next: express.NextFunction) {
         try {
@@ -33,7 +33,7 @@ class GroupsController {
                     let groupJson: any = group.toJSON();
                     groupJson.meta = groupJson.meta ?? {};
                     groupJson.meta.location = `${location}/Groups/${group.id}`;
-                    //groupJson.meta.resourceType = 'Group';
+                    groupJson.meta.resourceType = 'Group';
 
                     if (!req.query.attributes || arrAttr.includes('members')) { // include members
                         if(group.members && Array.isArray(group.members) && group.members.length > 0) {
@@ -79,7 +79,7 @@ class GroupsController {
                 let groupJson: any = group.toJSON();
                 groupJson.meta = groupJson.meta ?? {};
                 groupJson.meta.location = `${location}/Groups/${group.id}`;
-                //groupJson.meta.resourceType = 'Group';
+                groupJson.meta.resourceType = 'Group';
 
                 if (!req.query.attributes || arrAttr.includes('members')) { // include members
                     if(group.members && Array.isArray(group.members) && group.members.length > 0) {
@@ -121,7 +121,7 @@ class GroupsController {
                 let groupJson: any = group.toJSON();
                 groupJson.meta = groupJson.meta ?? {};
                 groupJson.meta.location = `${location}/Groups/${group.id}`;
-                //groupJson.meta.resourceType = 'Group';
+                groupJson.meta.resourceType = 'Group';
 
                 if (!req.query.attributes || arrAttr.includes('members')) { // include members
                     if(group.members && Array.isArray(group.members) && group.members.length > 0) {

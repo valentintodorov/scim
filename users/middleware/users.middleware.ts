@@ -7,7 +7,7 @@ import ajvSchemaCore20User from '../../common/scim-schemas/ajv-schemas/user';
 import ajvSchemaExtensionEnterprise20User from './../../common/scim-schemas/ajv-schemas/enterprise-user';
 import connectionManager from '../../common/services/connection-manager';
 
-const log: debug.IDebugger = debug('app:users-controller');
+const log: debug.IDebugger = debug('app:users-middleware');
 class UsersMiddleware {
     async validateRequiredUserBodyFields(
         req: express.Request,

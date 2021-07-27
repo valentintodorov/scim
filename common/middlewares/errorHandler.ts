@@ -3,7 +3,7 @@ import debug from 'debug';
 import ScimErrorSchema from  '../scim-schemas/scim-error-schema';
 import ScimError from './../scim-error';
 
-const log: debug.IDebugger = debug('app:users-controller');
+const log: debug.IDebugger = debug('app:errors-handler-middleware');
 class ErrorsHandlerMiddleware {
     errorHandler = async (
         err: Error, 
@@ -12,17 +12,14 @@ class ErrorsHandlerMiddleware {
         next: express.NextFunction
     ) => {
         if(this.isTrustedError(err)) {
-            log(err.name);
-            log(err.message);
-            log(err.stack);
             let e = err as ScimError;
             res.status(e.httpCode).send(ScimErrorSchema.jsonErr(e.httpCode , e.message));
         } else {
-            log(err.name);
-            log(err.message);
-            log(err.stack);
             res.status(500).send(ScimErrorSchema.jsonErr(500 , 'Internal Server Error'));
         }
+        log(err.name);
+        log(err.message);
+        log(err.stack);
     }
 
     isTrustedError(error: Error) {

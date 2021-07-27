@@ -36,8 +36,15 @@ const getTenantDbConnection = (tenantId: string) => {
   return db;
 }
 
+const getLogsDbConnection = (dbName: string) => {
+  // useDb will return new connection
+  const db = mongodb.useDb(dbName, { useCache: true });
+  return db;
+}
+
 export default {
   getTenantDbConnection,
   getTenantDB,
-  getModelByTenant
+  getModelByTenant,
+  getLogsDbConnection
 };

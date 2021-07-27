@@ -26,7 +26,7 @@ class UsersDao {
         userFields.meta.lastModified = currentDate;
 
         if(userFields.groups) {
-            (userFields as any).members = userFields.groups.map(g => g.value);
+            (userFields as any).groups = userFields.groups.map(g => g.value);
         }
 
         let Users = dbConnection.model('Users', UserSchema);
@@ -118,7 +118,7 @@ class UsersDao {
             }
 
             if(userFields.groups) {
-                (userFields as any).members = userFields.groups.map(g => g.value);
+                (userFields as any).groups = userFields.groups.map(g => g.value);
             }
 
             const Users = dbConnection.model('Users', UserSchema);
