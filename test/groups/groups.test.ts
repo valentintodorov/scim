@@ -89,8 +89,8 @@ describe('groups endpoints', function () {
         .set({ Authorization: auth })
         .send({
             schemas: firstUserBody.schemas,
-            userName: firstUserBody.userName + '_1_with_group',
-            externalId: firstUserBody.externalId + '_1_with_group'
+            userName: firstUserBody.userName + '_1_with_group_' + uuidv4(),
+            externalId: firstUserBody.externalId + '_1_with_group_' + uuidv4()
         });
 
         expect(res.status).to.equal(201);
@@ -103,8 +103,8 @@ describe('groups endpoints', function () {
         .set({ Authorization: auth })
         .send({
             schemas: firstUserBody.schemas,
-            userName: firstUserBody.userName + '_2_with_group',
-            externalId: firstUserBody.externalId + '_2_with_group'
+            userName: firstUserBody.userName + '_2_with_group_' + uuidv4(),
+            externalId: firstUserBody.externalId + '_2_with_group_' + uuidv4()
         });
 
         expect(res.status).to.equal(201);

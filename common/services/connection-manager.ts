@@ -1,5 +1,6 @@
 import mongodb from './mongodb';
 import debug from 'debug';
+import config from './../../config';
 
 const log: debug.IDebugger = debug('app:connection-manager');
 
@@ -15,7 +16,7 @@ const getTenantDB = (tenantId: string, modelName: string, schema: any) => {
     db.model(modelName, schema);
     return db;
   }
-  let dbError = `Mongoose connection error: ${dbName} with connection info ${JSON.stringify(process.env.MONGODB_URL)}`;
+  let dbError = `Mongoose connection error: ${dbName} with connection info ${JSON.stringify(config.MONGODB_URL)}`;
   log(dbError);
   throw new Error(dbError);
 };

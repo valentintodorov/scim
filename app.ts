@@ -19,15 +19,11 @@ import ErrorsHandlerMiddleware from './common/middlewares/errorHandler';
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerDocument from './swagger/scim-swagger.json';
 
-import dotenv from 'dotenv';
+import config from './config';
 
-const dotenvResult = dotenv.config();
-if (dotenvResult.error) {
-    throw dotenvResult.error;
-}
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
-const port = process.env.PORT;
+const port = config.PORT;
 const routes: Array<CommonRoutesConfig> = [];
 const log: debug.IDebugger = debug('app');
 
